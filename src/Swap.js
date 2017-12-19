@@ -1,15 +1,17 @@
-export class Swap{
-    constructor(){}
+export class Swap {
+    constructor() {
+    }
+
     /*
   params:{source:number[],i:number,j:number}
   return null
   */
-    public swapInArray(source,i,j){
-        if(source instanceof Array){
-            if(i===j){
+    public swapInArray(source, i, j) {
+        if (source instanceof Array) {
+            if (i === j) {
                 return
             }
-            if(i>=source.length || j>=source.length){
+            if (i >= source.length || j >= source.length) {
                 return
             }
             let temp;
