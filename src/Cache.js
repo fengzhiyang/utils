@@ -2,8 +2,6 @@ import Time from './Time'
 
 export class Cache {
     constructor() {
-        this.cookie = document.cookie;
-        this.storage = localStorage;
         this.time = new Time();
     }
 
@@ -18,7 +16,7 @@ export class Cache {
         if (arr.length <= 0) {
             return
         }
-        this.storage.setItem(name, JSON.stringify(data))
+        this.storage().setItem(name, JSON.stringify(data))
     }
 
     public getStorage(name) {
@@ -28,7 +26,7 @@ export class Cache {
         if (!name && typeof name !== 'string') {
             return
         }
-        let data = JSON.parse(this.storage.getItem(name));
+        let data = JSON.parse(this.storage().getItem(name));
         let arr = object.keys(data);
         if (arr.length <= 0) {
             return
@@ -43,11 +41,11 @@ export class Cache {
         if (!name && typeof name !== 'string') {
             return
         }
-        let data = JSON.parse(this.storage.getItem(name));
+        let data = JSON.parse(this.storage().getItem(name));
         if (!data) {
             return
         }
-        this.storage.removeItem(name)
+        this.storage().removeItem(name)
     }
 
     // public setCookie(name, value, expireDays) {
@@ -59,8 +57,13 @@ export class Cache {
     // public isCookie() {
     //     return this.cookie.length > 0 ? true : false
     // }
-
-    public isStorage() {
-        return this.storage ? true : false
+    private storage(){
+        return localStorage
+    }
+    private cookie(){
+        return document.cookie
+    }
+    private isStorage() {
+        return this.storage() ? true : false
     }
 }
