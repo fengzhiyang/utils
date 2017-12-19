@@ -54,9 +54,9 @@ export class Cache {
     //
     // }
     //
-    // public isCookie() {
-    //     return this.cookie.length > 0 ? true : false
-    // }
+    private isCookie() {
+        return this.cookie.length > 0 ? true : false
+    }
     private storage(){
         return localStorage
     }

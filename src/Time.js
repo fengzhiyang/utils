@@ -3,36 +3,45 @@ export class Time {
     }
 
     public currentTime() {
-        return this.getYear()+'/'+this.getMonth()+'/'+this.getDay()
+        return this.getYear() + '/' + this.getMonth() + '/' + this.getDay()
     }
-    public getYear(){
+
+    public getYear() {
         return this.getNowTime().getFullYear()
     }
-    public getMonth(){
-        return this.getNowTime().getMonth()+1;
+
+    public getMonth() {
+        return this.getNowTime().getMonth() + 1;
     }
-    public getDay(){
+
+    public getDay() {
         return this.getNowTime().getDay()
     }
-    public getMinutes(){
+
+    public getMinutes() {
         return this.getNowTime().getMinutes()
     }
-    public getHours(){
+
+    public getHours() {
         return this.getNowTime().getHours()
     }
-    public getSeconds(){
+
+    public getSeconds() {
         return this.getNowTime().getSeconds()
     }
-    public getDate(){
+
+    public getDate() {
         return this.getNowTime().getDate()
     }
-    public setDate(time){
-        if(!time && time<0){
+
+    public setDate(time) {
+        if (!time && time < 0) {
             return
         }
         this.getNowTime().setDate(time)
     }
+
     public getNowTime() {
-        return  new Date()
+        return new Date()
     }
 }
