@@ -49,64 +49,72 @@ export class Cache {
     }
 
     public setCookie(name, value, time) {
-        if(!this.isCookie()){
+        if (!this.isCookie()) {
             return
         }
-        if(!name && !value && typeof name!=='string' && typeof value!=='string'){
+        if (!name && !value && typeof name !== 'string' && typeof value !== 'string') {
             return
         }
-        let days = time || 7;
+      time = time||7;
         this.time.setTime(this.time.getTime() + time * 24 * 3600 * 1000);
-        this.setCookieValue(name,value,days)
+        this.setCookieValue(name, value, time)
     }
-    public getCookie(name){
-        if(!name &&  typeof name!=='string'){
+
+    public getCookie(name) {
+        if (!this.isCookie()) {
             return
         }
-        let cookie = this.cookie();
-        let startIndex = cookie.indexOf(name+'=');
-        if(startIndex===-1){
-            return ''
+        if (!name && typeof name !== 'string') {
+            return
         }
-        startIndex = startIndex+name.length+1;
-        let endIndex = cookie.indexOf(':',startIndex);
-        endIndex = endIndex<0?cookie.length:endIndex;
-        return decodeURIComponent(cookie.substring(startIndex,endIndex));
+        let cookieArr = this.cookie().replace(/\s/g, '').split(';');
+        for (let i = 0; i < cookieArr.length; i++) {
+            let tempArr = cookieArr[i].split('=');
+            if (tempArr[0] === name) {
+                return decodeURIComponent(tempArr[1]);
+            }
+        }
+        return ''
 
     }
-    public deleteCookie(name){
-        if(!name && typeof name!=='string'){
+
+    public deleteCookie(name) {
+        if (!name && typeof name !== 'string') {
             return
         }
         let value = this.getCookie(name);
-        if(!value){
+        if (!value) {
             return
         }
-        this.setCookie(key,value,-1)
+        this.setCookie(key, '1', -1)
     }
-    public setCache(name,value,time){
-        if(this.storage()){
-            this.setStorage(name,value)
-        }else{
-            this.setCookie(name,value,time)
+
+    public setCache(name, value, time) {
+        if (this.storage()) {
+            this.setStorage(name, value)
+        } else {
+            this.setCookie(name, value, time)
         }
     }
-    public getCache(name){
-        if(this.storage()){
+
+    public getCache(name) {
+        if (this.storage()) {
             this.getStorage(name)
-        }else {
+        } else {
             this.getCookie(name)
         }
     }
-    public deleteCache(name){
-        if(this.storage()){
+
+    public deleteCache(name) {
+        if (this.storage()) {
             this.deleteStorage(name)
-        }else{
+        } else {
             this.deleteCookie(name)
         }
     }
+
     private isCookie() {
-        return this.cookie ? true : false
+        return this.cookie() ? true : false
     }
 
     private storage() {
@@ -116,10 +124,12 @@ export class Cache {
     private cookie() {
         return document.cookie
     }
-    private setCookieValue(name,value,time){
-        document.cookie = name+'='+encodeURIComponent(value)+';expires='+(time=== undefined?'':this.time().toGMTString());
+
+    private setCookieValue(name, value, time) {
+        document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + (time === undefined ? '' : this.time().toGMTString());
 
     }
+
     private isStorage() {
         return this.storage() ? true : false
     }
