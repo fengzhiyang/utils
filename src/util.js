@@ -24,7 +24,7 @@ export class Util{
             newObj=JSON.parse(str)
         }else{
             for(let item of obj){
-                newobj[i] = typeof obj[i] === 'object' ? this.extends(obj[i]) : obj[i];
+                newobj[item] = typeof obj[item] === 'object' ? this.extends(obj[item]) : obj[item];
             }
         }
         return newObj

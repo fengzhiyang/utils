@@ -40,6 +40,9 @@ export class Time {
         }
         this.getNowTime().setDate(time)
     }
+    public toGMTString(){
+        return this.getNowTime().toGMTString()
+    }
 
     public getNowTime() {
         return new Date()
