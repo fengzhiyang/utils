@@ -1,5 +1,5 @@
 import {ajaxConfig, ajaxReadyState, ajaxStatus} from '../config/config'
-import util from './util'
+import util from './Util'
 
 export class Ajax {
     constructor(option) {

@@ -1,4 +1,4 @@
-export class Class{
+export class Style{
     constructor(){
         this.regExp=new RegExp('(\\s|^)' + cla + '(\\s|$)')
     }
@@ -11,10 +11,7 @@ export class Class{
             return
         }
         ele.className += ' '+cla
-        // let classArr = ele.className.split(' ');
-        // classArr.push(cla);
-        // ele.className = '';
-        // ele.className = classArr.join(' ')
+
     }
     public removeClass(ele,cla){
         if(!this.hasClass(ele,cla)){
