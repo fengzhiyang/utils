@@ -4,21 +4,4 @@ export const validConfig = {
     eMail: '请输入合法的邮箱'
 
 };
-export const ajaxConfig = {
-    get: 'Get',
-    post: 'Post',
-    json: 'json',
-    contentType: 'Content-Type',
-    urlencoded: 'application/x-www-form-urlencoded'
-}
-export const ajaxReadyState = {
-    Uninitialized: 0,
-    Loading: 1,
-    Loaded: 2,
-    Interactive: 3,
-    Completed: 4
-};
-export const ajaxStatus = {
-    success: 200,
-    redirect: 300
-}
+
