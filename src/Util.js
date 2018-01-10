@@ -69,6 +69,22 @@ export class Util {
     // public isArrayOrObject(obj){
     //     if(obj && typeof obj === 'object' && object.keys().length>0) return 'object'
     // }
+    public objectToQueryString(obj) {
+        if (!this.isEmptyObject(obj)) return false;
+        let params = [];
+        for (let key of obj) {
+            let value = obj[key];
+            if (!value) return false;
+            if (value instanceof Array) {
+                for (let i = 0; i < value.length; i++) {
+                    params.push(encodeURIComponent(key + '[' + i + ']') + '=' + encodeURIComponent(value[i]));
 
+                }
+                continue;
+            }
+            pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+        }
+        return params.join('&')
+    }
 
 }
